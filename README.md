@@ -34,6 +34,11 @@ Thanks to Georg Seifert (@schriftgestalt) for his help with improving performanc
 
 # License
 
+This repository is a fork of [Rafał Buchner's StemThickness](https://github.com/RafalBuchner/StemThickness).
+The original copyright remains with Rafał Buchner. The 2026 changes in this
+fork, including VariableStroke outline support, are by
+[Palf](https://github.com/palf-gh).
+
 Copyright 2015 Rafał Buchner (@rafalbuchner).
 
 With code samples by Georg Seifert (@schriftgestalt), Rainer Scheichelbauer (@mekkablue) and Mark Frömberg (@Mark2Mark).
@@ -74,6 +79,8 @@ VariableStroke 対応版を使う場合は、このフォークをビルドし�
 パフォーマンス改善に協力してくださった Georg Seifert（@schriftgestalt）に感謝します。
 
 ## ライセンス
+
+このリポジトリは [Rafał Buchner による StemThickness](https://github.com/RafalBuchner/StemThickness) のフォークです。元の著作権は Rafał Buchner に帰属します。このフォークにおける VariableStroke のアウトライン対応など、2026 年の変更は [Palf](https://github.com/palf-gh) によるものです。
 
 Copyright 2015 Rafał Buchner（@rafalbuchner）。Georg Seifert（@schriftgestalt）、Rainer Scheichelbauer（@mekkablue）、Mark Frömberg（@Mark2Mark）のコード例を含みます。
 
