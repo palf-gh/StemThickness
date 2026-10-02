@@ -107,6 +107,17 @@ static NSColor *pointColor = nil;
 		_lastNodePair = nil;
 		return;
 	}
+	// VariableStroke keeps centerlines in the editable layer. Ask its tool for
+	// the same expanded contours it uses for preview, without changing that layer.
+	NSMutableDictionary *request = [NSMutableDictionary dictionaryWithObject:layer forKey:@"layer"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"com.codex.VariableStroke.stemThicknessOutlineRequest"
+		object:request];
+	GSLayer *outlineLayer = request[@"outlineLayer"];
+	if (outlineLayer) {
+		NSMutableDictionary *expandedData = [closestData mutableCopy];
+		expandedData[@"layer"] = outlineLayer;
+		closestData = expandedData;
+	}
 	[self drawCrossingsForData:closestData];
 }
 
@@ -163,7 +174,7 @@ static NSColor *pointColor = nil;
 
 
 	// returns list of intersections
-	NSArray *crossPoints = [layer calculateIntersectionsStartPoint:[closestData[@"normal"] pointValue] endPoint:[closestData[@"minusNormal"] pointValue] decompose:NO];
+	NSArray *crossPoints = [layer calculateIntersectionsStartPoint:[closestData[@"normal"] pointValue] endPoint:[closestData[@"minusNormal"] pointValue]];
 
 	if (crossPoints.count > 2) {
 		// find closest point in the list of intersections

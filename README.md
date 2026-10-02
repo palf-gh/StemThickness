@@ -1,5 +1,13 @@
 # StemThickness
 
+## VariableStroke support
+
+When the VariableStroke tool is installed and a glyph uses live variable strokes,
+the reporter measures its generated outline while keeping the editable centerline
+untouched. Install the matching VariableStroke update and restart Glyphs 3 after
+rebuilding or replacing this reporter. Ordinary outline glyphs continue to use
+the original measurement path.
+
 Show Thickness Plugin for for [Glyphs App](http://glyphsapp.com/). The tool shows how thick is the stem in a pointed place:
 
 ![Show Thickness illustration](images/StemThickness.gif)
