@@ -98,6 +98,15 @@ static NSColor *pointColor = nil;
 	_layerOrigin = view.activePosition;
 
 	GSLayer *layer = [view activeLayer];
+	// Measure the generated contours themselves. The editable centerline must not
+	// supply either the nearest point or an intersection for this measurement.
+	NSMutableDictionary *request = [NSMutableDictionary dictionaryWithObject:layer forKey:@"layer"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"com.codex.VariableStroke.stemThicknessOutlineRequest"
+		object:request];
+	GSLayer *outlineLayer = request[@"outlineLayer"];
+	if (outlineLayer) {
+		layer = outlineLayer;
+	}
 	NSDictionary *closestData = [self calcClosestInfo:layer position:crossHairCenter];
 	if (!closestData) {
 		return;
@@ -106,17 +115,6 @@ static NSColor *pointColor = nil;
 	if (GSDistance(crossHairCenter, [closestData[@"onCurve"] pointValue]) > 35 / _scale) {
 		_lastNodePair = nil;
 		return;
-	}
-	// VariableStroke keeps centerlines in the editable layer. Ask its tool for
-	// the same expanded contours it uses for preview, without changing that layer.
-	NSMutableDictionary *request = [NSMutableDictionary dictionaryWithObject:layer forKey:@"layer"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"com.codex.VariableStroke.stemThicknessOutlineRequest"
-		object:request];
-	GSLayer *outlineLayer = request[@"outlineLayer"];
-	if (outlineLayer) {
-		NSMutableDictionary *expandedData = [closestData mutableCopy];
-		expandedData[@"layer"] = outlineLayer;
-		closestData = expandedData;
 	}
 	[self drawCrossingsForData:closestData];
 }
